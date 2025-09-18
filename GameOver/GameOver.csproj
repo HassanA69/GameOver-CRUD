@@ -15,4 +15,16 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Games\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Games\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Categories\" />
+      <Folder Include="Views\Devices\" />
+      <Folder Include="Views\GameDevices\" />
+      <Folder Include="wwwroot\assets\images\games\" />
+    </ItemGroup>
+
 </Project>
