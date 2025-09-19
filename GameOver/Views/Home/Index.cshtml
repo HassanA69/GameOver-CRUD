@@ -5,39 +5,64 @@
 }
 @if (!Model.Any())
 {
-    <div class="alert  alert-warning mt-3">
-        <h4 class="alert-heading" data-relingo-block="true">No games!</h4>
+    <div class="alert alert-warning mt-3">
+        <h4 class="alert-heading">No games!</h4>
         <p class="mb-0">No games were added yet.</p>
     </div>
 }
 else
 {
-    <div class="row mt-3">
+    <style>
+        .game-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-cover {
+            transition: transform 0.4s ease;
+        }
+
+        .game-card:hover .game-cover {
+            transform: scale(1.08);
+        }
+    </style>
+
+    <div class="row mt-3 g-4">
         @foreach (var game in Model)
         {
             <div class="col-lg-3 col-md-6">
-                <div class="card border-light mb-3" style="max-width: 20rem;">
-                    <!-- Body  !-->
-                    <div class="card-body" style="background-image: url(@($"{FileSettings.ImagesPath}/{game.Cover}")); background-size: cover; background-position: center;height: 350px">
-                        <div class="d-flex align-items-end h-100">
-                            <span class="badge bg-success fs-6">@game.Category.Name</span>
+                <a class="card border-light shadow-sm text-decoration-none rounded-3 overflow-hidden h-100 game-card"
+                   asp-controller="Games" asp-action="Details" asp-route-id="@game.Id">
 
+                    <!-- Body -->
+                    <div class="card-body p-0 overflow-hidden"
+                         style="height: 300px;">
+                        <div class="w-100 h-100 game-cover"
+                             style="background-image: url('@($"{FileSettings.ImagesPath}/{game.Cover}")');
+                                    background-size: cover;
+                                    background-position: center;">
+                            <div class="d-flex align-items-end h-100 p-2">
+                                <span class="badge bg-success fs-6">@game.Category.Name</span>
+                            </div>
                         </div>
                     </div>
-                    <!-- footer !-->
-                    <div class="card-footer text-muted d-flex justify-content-between align-items-center">
-                        <h5>@game.Name</h5>
+
+                    <!-- Footer -->
+                    <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 text-dark">@game.Name</h5>
                         <div>
-                           @foreach (var gameDevice in game.Devices)
-                           {
-                               <i class="@gameDevice.Device.Icon me-2 fs-5"></i>
-                           }
+                            @foreach (var gameDevice in game.Devices)
+                            {
+                                <i class="@gameDevice.Device.Icon me-1 fs-5 text-muted"></i>
+                            } 
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         }
-
-
     </div>
 }

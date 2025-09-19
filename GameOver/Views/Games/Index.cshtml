@@ -1,4 +1,4 @@
-
+@model IEnumerable<Game>
 @{
     ViewData["Title"] = "Games";
 }
@@ -6,3 +6,57 @@
     <i class="bi bi-plus-circle-dotted"></i>
     Add Game
 </a>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning mt-3">
+        <h4 class="alert-heading">No games!</h4>
+        <p class="mb-0">No games were added yet.</p>
+    </div>
+}
+else
+{
+    <div class="mt-5">
+        <table class="table border-primary align-middle">
+            <tbody>
+            @foreach (var game in Model)
+            {
+                <tr class="border-1 border-success table-active">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <!-- Image wrapper with fixed size -->
+                            <div class="me-4" style="width:90px; height:120px;">
+                                <img src="@($"{FileSettings.ImagesPath}/{game.Cover}")"
+                                     alt="@game.Name"
+                                     class="img-fluid w-100 h-100 object-fit-cover rounded shadow-sm"/>
+                            </div>
+
+                            <!-- Text info -->
+                            <div class="d-flex flex-column">
+                                <h4 class="mb-1">@game.Name</h4>
+                                <h6 class="text-muted">@game.Category.Name</h6>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@game.Id"
+                           class="btn btn-info rounded-3 me-2">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a href="javascript:;"
+                           class="btn btn-danger rounded-3 js-delete" data-id="@game.Id">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody> 
+        </table>
+    </div>
+}
+
+@section Scripts
+{
+    <script src="~/js/game-delete.js"></script>
+}
