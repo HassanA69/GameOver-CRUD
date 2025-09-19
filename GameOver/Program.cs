@@ -2,14 +2,12 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString  = builder.Configuration.GetConnectionString("DefaultConnection")
-        ?? throw new InvalidOperationException("No connection string found");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                       ?? throw new InvalidOperationException("No connection string found");
 
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    option =>option.UseSqlServer(connectionString)
-    
-    );
+builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(connectionString)
+);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICategoriesService, CategoriesService>();
 builder.Services.AddScoped<IDevicesService, DevicesService>();

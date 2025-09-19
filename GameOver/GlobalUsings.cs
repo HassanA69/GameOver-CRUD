@@ -7,4 +7,4 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using GameOver.Models;
 global using GameOver.Settings;
-
+global using GameOver.Attribute;

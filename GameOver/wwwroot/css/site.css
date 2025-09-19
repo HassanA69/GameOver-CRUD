@@ -81,13 +81,17 @@ body {
     background-color: #bdf168;
     border: 2px solid #000000;
 }
-
+ 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
     color: #000000;
 }
 
 .select2 {
-    width: 100% !important;
+    width: 100% !important; 
 }
 
 /* End override select2 */
+.border-success{
+    --bs-border-opacity: 1;
+    border-color: rgb(162 228 54) !important; 
+}
